@@ -1,5 +1,6 @@
 require('dotenv').config()
 let baseUrl = ''
+let publicPath
 switch (process.env.BASE) {
   case 'dev':
     baseUrl = process.env.DEV_BASE_URL
@@ -9,6 +10,7 @@ switch (process.env.BASE) {
     break
   case 'prod':
     baseUrl = process.env.PROD_BASE_URL
+    publicPath = 'https://fezz.che300.com/c3-generator/'
     break
 }
 module.exports = {
@@ -84,6 +86,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    publicPath,
     extend(config, ctx) {}
   },
   server: {
