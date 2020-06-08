@@ -37,6 +37,9 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module'
   ],
+  router: {
+    base: '/h5/'
+  },
   /*
    ** Nuxt.js modules
    */
