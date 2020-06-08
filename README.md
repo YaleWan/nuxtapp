@@ -1,22 +1,31 @@
-# nuxtapp
+# c3-generator
 
-> My scrumtrulescent Nuxt.js project
+> Active page generation
 
 ## Build Setup
 
 ```bash
-# install dependencies
+# 安装依赖
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# 开发环境
 $ yarn dev
 
-# build for production and launch server
+# 生产环境
 $ yarn build
 $ yarn start
 
-# generate static project
+# 测试环境
+$ yarn build
+$ yarn test
+
+# 构建静态页面
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## 规范
+
+- prettier
+- eslint
+- stylelint
+- lint-stage

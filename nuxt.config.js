@@ -1,13 +1,32 @@
+require('dotenv').config()
+let baseUrl = ''
+switch (process.env.BASE) {
+  case 'dev':
+    baseUrl = process.env.DEV_BASE_URL
+    break
+  case 'test':
+    baseUrl = process.env.TEST_BASE_URL
+    break
+  case 'prod':
+    baseUrl = process.env.PROD_BASE_URL
+    break
+}
 module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
    */
+  env: {
+    base_env: process.env.BASE
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -27,7 +46,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vconsole', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -37,9 +56,6 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module'
   ],
-  router: {
-    base: '/h5/'
-  },
   /*
    ** Nuxt.js modules
    */
@@ -53,7 +69,14 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    debug: process.env.BASE === 'dev',
+    baseURL: baseUrl
+  },
+  router: {
+    base: process.env.BASE === 'dev' ? '/' : '/h5/'
+    // base: '/h5/'
+  },
   /*
    ** Build configuration
    */
@@ -64,6 +87,6 @@ module.exports = {
     extend(config, ctx) {}
   },
   server: {
-    port: 3333
+    port: process.env.BASE === 'prod' ? 3333 : 3000 // default: 3000
   }
 }
